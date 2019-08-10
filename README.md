@@ -1,4 +1,4 @@
-[![Build Status](https://badgen.net/travis/eobermuhlner/jshell-scriptengine)](https://travis-ci.org/eobermuhlner/jshell-scriptengine)
+[![Build Status](https://api.travis-ci.org/eobermuhlner/jshell-scriptengine.svg?branch=master)](https://travis-ci.org/eobermuhlner/jshell-scriptengine)
 [![Code Coverage](https://badgen.net/codecov/c/github/eobermuhlner/jshell-scriptengine)](https://codecov.io/gh/eobermuhlner/jshell-scriptengine)
 [![Open Issues](https://badgen.net/github/open-issues/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/issues)
 [![Commits](https://badgen.net/github/commits/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
