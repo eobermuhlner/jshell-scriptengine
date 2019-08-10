@@ -23,7 +23,7 @@ in your build script (please verify the version number to be the newest release)
 <dependency>
   <groupId>ch.obermuhlner</groupId>
   <artifactId>scriptengine-jshell</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-  compile 'ch.obermuhlner:scriptengine-jshell:0.1.0'
+  compile 'ch.obermuhlner:scriptengine-jshell:1.0.0'
 }
 ```
 
