@@ -3,7 +3,7 @@
 [![Open Issues](https://badgen.net/github/open-issues/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/issues)
 [![Commits](https://badgen.net/github/commits/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
 [![Last Commits](https://badgen.net/github/last-commit/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
-[![Maven Central - jshell-scriptengine](https://img.shields.io/maven-central/v/ch.obermuhlner/scriptengine-jshell.svg)](https://search.maven.org/artifact/ch.obermuhlner/jshell-scriptengine)
+[![Maven Central - jshell-scriptengine](https://img.shields.io/maven-central/v/ch.obermuhlner/jshell-scriptengine.svg)](https://search.maven.org/artifact/ch.obermuhlner/jshell-scriptengine)
 
 # JShell scripting engine
 
