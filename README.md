@@ -1,15 +1,9 @@
-[![Build Status](https://badgen.net/travis/eobermuhlner/java-scriptengine)](https://travis-ci.org/eobermuhlner/java-scriptengine)
-[![Code Coverage](https://badgen.net/codecov/c/github/eobermuhlner/java-scriptengine)](https://codecov.io/gh/eobermuhlner/java-scriptengine)
-[![Open Issues](https://badgen.net/github/open-issues/eobermuhlner/java-scriptengine)](https://github.com/eobermuhlner/java-scriptengine/issues)
-[![Commits](https://badgen.net/github/commits/eobermuhlner/java-scriptengine)](https://github.com/eobermuhlner/java-scriptengine/graphs/commit-activity)
-[![Last Commits](https://badgen.net/github/last-commit/eobermuhlner/java-scriptengine)](https://github.com/eobermuhlner/java-scriptengine/graphs/commit-activity)
-
-
-A collection of JSR-223 compatible script engines for Java.
-
-Currently supported script engines are:
-* JShell [![Maven Central - scriptengine-jshell](https://img.shields.io/maven-central/v/ch.obermuhlner/scriptengine-jshell.svg)](https://search.maven.org/artifact/ch.obermuhlner/scriptengine-jshell)
-* Spring Expression Language (SpEL)
+[![Build Status](https://badgen.net/travis/eobermuhlner/jshell-scriptengine)](https://travis-ci.org/eobermuhlner/jshell-scriptengine)
+[![Code Coverage](https://badgen.net/codecov/c/github/eobermuhlner/jshell-scriptengine)](https://codecov.io/gh/eobermuhlner/jshell-scriptengine)
+[![Open Issues](https://badgen.net/github/open-issues/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/issues)
+[![Commits](https://badgen.net/github/commits/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
+[![Last Commits](https://badgen.net/github/last-commit/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
+[![Maven Central - jshell-scriptengine](https://img.shields.io/maven-central/v/ch.obermuhlner/scriptengine-jshell.svg)](https://search.maven.org/artifact/ch.obermuhlner/jshell-scriptengine)
 
 # JShell scripting engine
 
@@ -18,7 +12,7 @@ The JShell was introduced with Java 9 and was designed to be used for interactiv
 ## Using JShell scripting engine in your projects 
 
 To use the JShell scripting you can either download the newest version of the .jar file from the
-[published releases on Github](https://github.com/eobermuhlner/java-scriptengine/releases/)
+[published releases on Github](https://github.com/eobermuhlner/jshell-scriptengine/releases/)
 or use the following dependency to
 [Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cscriptengine-jshell)
 in your build script (please verify the version number to be the newest release):
@@ -237,8 +231,3 @@ try {
 ```console
 Result: Eric1967
 ```
-
-
-
-
- 
