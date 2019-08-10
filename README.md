@@ -10,15 +10,24 @@
 The JShell was introduced with Java 9 and was designed to be used
 for interactive execution of code snippets in Java.
 
-The `jshell-scriptengine` library is a wrapper around the JShell API
-that executes an entire script and handles the binding of variables.
+The `jshell-scriptengine` library is a Java 11 wrapper around the JShell
+API that executes an entire script and handles the binding of variables.
 
-It is a powerful choice if your project needs to execute code that
-can be easily changed outside of the development cycle and when already deployed.
+`jshell-scriptengine` is a good alternative to the usual `javascript`
+commonly used, especially if the users that will end up writing the
+scripts are already experienced Java programmers or can use the leverage
+that a `Java` framework can provide.
+
+Using a scripting engine is a powerful choice if your project needs to
+execute code that can be easily changed outside of the development cycle
+and when already deployed.
 
 Typical use cases are:
 - directory in your deployed application containing scripts for customizable business logic
 - editor in your application to edit (and persist) scripts
+
+If you believe that `Java` as a scripting language does not exactly fit
+your needs, consider 
 
 ## Using JShell scripting engine in your projects 
 
