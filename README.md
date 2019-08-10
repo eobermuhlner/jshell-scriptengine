@@ -14,7 +14,7 @@ The JShell was introduced with Java 9 and was designed to be used for interactiv
 To use the JShell scripting you can either download the newest version of the .jar file from the
 [published releases on Github](https://github.com/eobermuhlner/jshell-scriptengine/releases/)
 or use the following dependency to
-[Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cscriptengine-jshell)
+[Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cjshell-scriptengine)
 in your build script (please verify the version number to be the newest release):
 
 ### Use JShell scripting engine in Maven build
@@ -22,7 +22,7 @@ in your build script (please verify the version number to be the newest release)
 ```xml
 <dependency>
   <groupId>ch.obermuhlner</groupId>
-  <artifactId>scriptengine-jshell</artifactId>
+  <artifactId>shell-scriptengine</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-  compile 'ch.obermuhlner:scriptengine-jshell:1.0.0'
+  compile 'ch.obermuhlner:shell-scriptengine:1.0.0'
 }
 ```
 
