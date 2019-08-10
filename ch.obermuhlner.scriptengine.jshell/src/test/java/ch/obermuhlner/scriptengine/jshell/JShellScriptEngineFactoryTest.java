@@ -48,7 +48,7 @@ public class JShellScriptEngineFactoryTest {
     @Test
     public void testGetNames() {
         JShellScriptEngineFactory factory = new JShellScriptEngineFactory();
-        assertThat(factory.getNames()).isEqualTo(Arrays.asList("JShell", "jshell", "ch.obermuhlner:scriptengine-jshell", "obermuhlner-jshell"));
+        assertThat(factory.getNames()).isEqualTo(Arrays.asList("JShell", "jshell", "ch.obermuhlner:jshell-scriptengine", "obermuhlner-jshell"));
     }
 
     @Test
