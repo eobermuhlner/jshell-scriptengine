@@ -5,7 +5,7 @@ apply plugin: 'signing'
 apply plugin: 'jacoco'
 
 group = 'ch.obermuhlner'
-version = '0.1.0'
+version = '1.0.0'
 archivesBaseName = 'jshell-scriptengine'
 
 ext {
@@ -90,18 +90,18 @@ uploadArchives {
 	            packaging 'jar'
 	            // optionally artifactId can be defined here
 	            description 'Java script engine for JShell.'
-	            url 'https://github.com/eobermuhlner/java-scriptengine'
+	            url 'https://github.com/eobermuhlner/jshell-scriptengine'
 
 	            scm {
-	                connection 'scm:git:git://github.com/java-scriptengine.git'
-	                developerConnection 'scm:ssh://github.com:eobermuhlner/java-scriptengine.git'
-	                url 'https://github.com/eobermuhlner/java-scriptengine/'
+	                connection 'scm:git:git://github.com/jshell-scriptengine.git'
+	                developerConnection 'scm:ssh://github.com:eobermuhlner/jshell-scriptengine.git'
+	                url 'https://github.com/eobermuhlner/jshell-scriptengine/'
 	            }
 
 	            licenses {
 	                license {
 	                    name 'MIT License'
-	                    url 'https://raw.githubusercontent.com/eobermuhlner/java-scriptengine/master/LICENSE.txt'
+	                    url 'https://raw.githubusercontent.com/eobermuhlner/jshell-scriptengine/master/LICENSE.txt'
 	                }
 	            }
 
