@@ -6,7 +6,7 @@ import javax.script.ScriptException;
 
 public class ScriptEngineExample {
     public static void main(String[] args) {
-        //runNashornExamples();
+        runNashornExamples();
         runJShellExamples();
     }
 
