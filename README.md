@@ -27,7 +27,9 @@ Typical use cases are:
 - editor in your application to edit (and persist) scripts
 
 If you believe that `Java` as a scripting language does not exactly fit
-your needs, consider 
+your needs, consider the sibling project
+[spel-scriptengine](https://github.com/eobermuhlner/spel-scriptengine)
+(Spring Expression Language Scripting Engine).
 
 ## Using JShell scripting engine in your projects 
 
