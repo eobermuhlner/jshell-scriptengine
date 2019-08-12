@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import javax.script.*;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -322,6 +323,38 @@ public class JShellScriptEngineTest {
     }
 
     @Test
+    public void testCompilableReader() throws ScriptException {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("jshell");
+        assertThat(engine).isInstanceOf(Compilable.class);
+
+        String script = "alpha + beta";
+        StringReader scriptReader = new StringReader(script);
+
+        Compilable compiler = (Compilable) engine;
+        CompiledScript compiledScript = compiler.compile(scriptReader);
+        assertThat(compiledScript.getEngine()).isSameAs(engine);
+
+        for (int i = 0; i < 2; i++) {
+            Bindings bindings = engine.createBindings();
+
+            bindings.put("alpha", 2);
+            bindings.put("beta", 3);
+            Object result = compiledScript.eval(bindings);
+            assertThat(result).isEqualTo(5);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            Bindings bindings = engine.createBindings();
+
+            bindings.put("alpha", "aaa");
+            bindings.put("beta", "bbb");
+            Object result = compiledScript.eval(bindings);
+            assertThat(result).isEqualTo("aaabbb");
+        }
+    }
+
+    @Test
     public void testEvalReader() throws ScriptException {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("jshell");
@@ -353,6 +386,17 @@ public class JShellScriptEngineTest {
         Reader reader = new StringReader("alpha+321");
         Object result = engine.eval(reader, bindings);
         assertThat(result).isEqualTo(1321);
+    }
+
+    @Test
+    public void testEvalReaderFail() {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("jshell");
+
+        Reader reader = new FailReader();
+        assertThatThrownBy(() -> {
+            Object result = engine.eval(reader);
+        }).isInstanceOf(ScriptException.class);
     }
 
     @Test
@@ -428,5 +472,21 @@ public class JShellScriptEngineTest {
     }
 
     protected static class ProtectedClass {
+    }
+
+    public static class FailReader extends Reader {
+        public FailReader() {
+        }
+
+        @Override
+        public int read(char[] cbuf, int off, int len) throws IOException {
+            throw new IOException("FailReader: always fails in read()");
+        }
+
+        @Override
+        public void close() throws IOException {
+            throw new IOException("FailReader: always fails in close()");
+        }
+
     }
 }
