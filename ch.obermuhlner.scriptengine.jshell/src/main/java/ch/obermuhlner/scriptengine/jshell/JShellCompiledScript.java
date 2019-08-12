@@ -34,17 +34,15 @@ public class JShellCompiledScript extends CompiledScript {
         Bindings engineBindings = context.getBindings(ScriptContext.ENGINE_SCOPE);
 
         final AccessDirectExecutionControl accessDirectExecutionControl = new AccessDirectExecutionControl();
-        final JShell jshell = JShell.builder()
+        try (JShell jshell = JShell.builder()
                 .executionEngine(new AccessDirectExecutionControlProvider(accessDirectExecutionControl), null)
-                .build();
+                .build()) {
+            pushVariables(jshell, accessDirectExecutionControl, globalBindings, engineBindings);
+            Object result = evaluateSnippets(jshell, accessDirectExecutionControl);
+            pullVariables(jshell, accessDirectExecutionControl, globalBindings, engineBindings);
 
-        pushVariables(jshell, accessDirectExecutionControl, globalBindings, engineBindings);
-        Object result = evaluateSnippets(jshell, accessDirectExecutionControl);
-        pullVariables(jshell, accessDirectExecutionControl, globalBindings, engineBindings);
-
-        jshell.close();
-
-        return result;
+            return result;
+        }
     }
 
     private static Map<String, Object> staticVariables;
