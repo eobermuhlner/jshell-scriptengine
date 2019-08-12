@@ -2,6 +2,7 @@ package ch.obermuhlner.scriptengine.jshell;
 
 import jdk.jshell.*;
 import jdk.jshell.execution.DirectExecutionControl;
+import jdk.jshell.execution.LocalExecutionControlProvider;
 import jdk.jshell.spi.ExecutionControl;
 import jdk.jshell.spi.ExecutionControlProvider;
 import jdk.jshell.spi.ExecutionEnv;
@@ -20,7 +21,9 @@ public class JShellCompiledScript extends CompiledScript {
     JShellCompiledScript(JShellScriptEngine engine, String script) throws ScriptException {
         this.engine = engine;
 
-        JShell jshell = JShell.builder().build();
+        JShell jshell = JShell.builder()
+                .executionEngine(new LocalExecutionControlProvider(), null)
+                .build();
         this.snippets = compileScript(jshell, script);
         jshell.close();
     }
