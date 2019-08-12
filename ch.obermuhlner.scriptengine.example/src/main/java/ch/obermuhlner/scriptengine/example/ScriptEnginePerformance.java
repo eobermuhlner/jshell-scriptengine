@@ -22,8 +22,9 @@ public class ScriptEnginePerformance {
 
         System.out.print("Measure ");
         try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Compile_Multiple_Evaluations.csv")))) {
-            out.println("n, Multi Eval, Compile Multi Eval");
-            for (int i = 0; i < 100; i+=10) {
+            out.println("# csv2chart.title=Multiple Eval vs. Single Compile + Multiple Eval");
+            out.println("n, Multi Eval, Compile + Multi Eval");
+            for (int i = 0; i <= 100; i+=10) {
                 System.out.print(".");
                 int n = i;
                 double millis1 = measure(() -> runMultiEvalExample(n));
