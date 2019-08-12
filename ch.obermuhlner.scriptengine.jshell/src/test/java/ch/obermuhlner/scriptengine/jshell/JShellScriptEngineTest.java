@@ -104,17 +104,32 @@ public class JShellScriptEngineTest {
     public void testBindingsMultipleEval() throws ScriptException {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("jshell");
+
         engine.put("alpha", 2);
         engine.put("beta", 3);
         engine.put("gamma", 0);
 
-        Object result = engine.eval("gamma = alpha + beta");
+        Object result;
+        result = engine.eval("gamma = alpha + beta");
         assertThat(result).isEqualTo(5);
         assertThat(engine.get("gamma")).isEqualTo(5);
 
-        Object result2 = engine.eval("gamma = alpha + beta + gamma");
-        assertThat(result2).isEqualTo(10);
+        result = engine.eval("gamma = alpha + beta + gamma");
+        assertThat(result).isEqualTo(10);
         assertThat(engine.get("gamma")).isEqualTo(10);
+
+        engine.put("alpha", "aaa");
+        engine.put("beta", "bbb");
+        engine.put("gamma", "");
+
+        result = engine.eval("gamma = alpha + beta");
+        assertThat(result).isEqualTo("aaabbb");
+        assertThat(engine.get("gamma")).isEqualTo("aaabbb");
+
+        result = engine.eval("gamma = alpha + beta + gamma");
+        assertThat(result).isEqualTo("aaabbbaaabbb");
+        assertThat(engine.get("gamma")).isEqualTo("aaabbbaaabbb");
+
     }
 
     @Test
@@ -273,6 +288,37 @@ public class JShellScriptEngineTest {
         ScriptEngine engine = manager.getEngineByName("jshell");
 
         assertThat(engine.get("illegal with spaces")).isNull();
+    }
+
+    @Test
+    public void testCompilable() throws ScriptException {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("jshell");
+        assertThat(engine).isInstanceOf(Compilable.class);
+
+        String script = "alpha + beta";
+
+        Compilable compiler = (Compilable) engine;
+        CompiledScript compiledScript = compiler.compile(script);
+        assertThat(compiledScript.getEngine()).isSameAs(engine);
+
+        for (int i = 0; i < 2; i++) {
+            Bindings bindings = engine.createBindings();
+
+            bindings.put("alpha", 2);
+            bindings.put("beta", 3);
+            Object result = compiledScript.eval(bindings);
+            assertThat(result).isEqualTo(5);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            Bindings bindings = engine.createBindings();
+
+            bindings.put("alpha", "aaa");
+            bindings.put("beta", "bbb");
+            Object result = compiledScript.eval(bindings);
+            assertThat(result).isEqualTo("aaabbb");
+        }
     }
 
     @Test

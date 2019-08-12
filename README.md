@@ -178,3 +178,64 @@ System.out.println(unknown);
 	at ch.obermuhlner.scriptengine.example.ScriptEngineExample.runErrorExample(ScriptEngineExample.java:84)
 	at ch.obermuhlner.scriptengine.example.ScriptEngineExample.main(ScriptEngineExample.java:14)
 ```
+
+## Compiling 
+
+The `JShellScriptEngine` implements the `Compilable` interface.
+
+You can compile a script into a `CompiledScript` and execute it multiple
+times with different bindings.
+
+```java
+try {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("jshell");
+    Compilable compiler = (Compilable) engine;
+
+    CompiledScript compiledScript = compiler.compile("var output = alpha + beta");
+
+    {
+        Bindings bindings = engine.createBindings();
+
+        bindings.put("alpha", 2);
+        bindings.put("beta", 3);
+        Object result = compiledScript.eval(bindings);
+        Integer output = (Integer) bindings.get("output");
+        System.out.println("Result (Integer): " + result);
+        System.out.println("Output (Integer): " + output);
+    }
+
+    {
+        Bindings bindings = engine.createBindings();
+
+        bindings.put("alpha", "aaa");
+        bindings.put("beta", "bbb");
+        Object result = compiledScript.eval(bindings);
+        String output = (String) bindings.get("output");
+        System.out.println("Result (String): " + result);
+        System.out.println("Output (String): " + output);
+    }
+} catch (ScriptException e) {
+    e.printStackTrace();
+}
+```
+
+The console output shows that the same compiled script was able to run
+with different bindings, which where even of different runtime types.
+
+```console
+Result (Integer): 5
+Output (Integer): 5
+Result (String): aaabbb
+Output (String): aaabbb
+``` 
+
+Separating the compilation from the evaluation is more efficient if you
+need to evaluate the same script multiple times.
+
+Here the execution times in milliseconds for
+calling `JShellScriptEngine.eval(String)` many times compared
+with a single `JShellScriptEngine.compile(String)`
+and many `JShellCompiledScript.eval(Bindings)`:
+
+![Performance: Compile Multiple Evaluations](docs/performance/Compile Multiple Evaluations.svg)

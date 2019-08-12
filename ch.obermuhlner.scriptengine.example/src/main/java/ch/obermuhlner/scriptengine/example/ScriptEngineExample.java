@@ -1,8 +1,6 @@
 package ch.obermuhlner.scriptengine.example;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 
 public class ScriptEngineExample {
     public static void main(String[] args) {
@@ -20,6 +18,7 @@ public class ScriptEngineExample {
         runJShellBindingExample();
         runJShellVisibleClassesExample();
         runJShellErrorExample();
+        runJShellCompileExample();
     }
 
     private static void runExample(String engineName, String script) {
@@ -91,6 +90,40 @@ public class ScriptEngineExample {
 
             Object result = engine.eval(script);
             System.out.println("Result: " + result);
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void runJShellCompileExample() {
+        try {
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine = manager.getEngineByName("jshell");
+            Compilable compiler = (Compilable) engine;
+
+            CompiledScript compiledScript = compiler.compile("var output = alpha + beta");
+
+            {
+                Bindings bindings = engine.createBindings();
+
+                bindings.put("alpha", 2);
+                bindings.put("beta", 3);
+                Object result = compiledScript.eval(bindings);
+                Integer output = (Integer) bindings.get("output");
+                System.out.println("Result (Integer): " + result);
+                System.out.println("Output (Integer): " + output);
+            }
+
+            {
+                Bindings bindings = engine.createBindings();
+
+                bindings.put("alpha", "aaa");
+                bindings.put("beta", "bbb");
+                Object result = compiledScript.eval(bindings);
+                String output = (String) bindings.get("output");
+                System.out.println("Result (String): " + result);
+                System.out.println("Output (String): " + output);
+            }
         } catch (ScriptException e) {
             e.printStackTrace();
         }
