@@ -5,6 +5,10 @@ import java.util.Map;
 public class VariablesTransfer {
     private static final ThreadLocal<Map<String, Object>> threadLocalVariables = new ThreadLocal<>();
 
+    private VariablesTransfer() {
+        // empty
+    }
+
     public static void setVariables(Map<String, Object> variables) {
         threadLocalVariables.set(variables);
     }

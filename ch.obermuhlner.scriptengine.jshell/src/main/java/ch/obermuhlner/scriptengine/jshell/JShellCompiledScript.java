@@ -31,7 +31,7 @@ public class JShellCompiledScript extends CompiledScript {
     }
 
     @Override
-    public synchronized Object eval(ScriptContext context) throws ScriptException {
+    public Object eval(ScriptContext context) throws ScriptException {
         Bindings globalBindings = context.getBindings(ScriptContext.GLOBAL_SCOPE);
         Bindings engineBindings = context.getBindings(ScriptContext.ENGINE_SCOPE);
 
@@ -51,8 +51,9 @@ public class JShellCompiledScript extends CompiledScript {
         Map<String, Object> variables = mergeBindings(globalBindings, engineBindings);
         VariablesTransfer.setVariables(variables);
 
-        for (String name : variables.keySet()) {
-            Object value = variables.get(name);
+        for (Map.Entry<String, Object> entry : variables.entrySet()) {
+            String name = entry.getKey();
+            Object value = entry.getValue();
             String type = determineType(value);
             String script = type + " " + name + " = (" + type + ") " + VariablesTransfer.class.getName() + ".getVariableValue(\"" + name + "\");";
             evaluateSnippet(jshell, accessDirectExecutionControl, script);
