@@ -238,4 +238,4 @@ calling `JShellScriptEngine.eval(String)` many times compared
 with a single `JShellScriptEngine.compile(String)`
 and many `JShellCompiledScript.eval(Bindings)`:
 
-![Performance: Compile Multiple Evaluations](docs/performance/Compile Multiple Evaluations.svg)
+![Performance: Compile Multiple Evaluations](docs/performance/Compile_Multiple_Evaluations.svg)

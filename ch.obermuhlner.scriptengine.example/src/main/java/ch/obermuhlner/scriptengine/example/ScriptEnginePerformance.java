@@ -21,7 +21,7 @@ public class ScriptEnginePerformance {
         System.out.println();
 
         System.out.print("Measure ");
-        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Compile Multiple Evaluations.csv")))) {
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Compile_Multiple_Evaluations.csv")))) {
             out.println("n, Multi Eval, Compile Multi Eval");
             for (int i = 0; i < 100; i+=10) {
                 System.out.print(".");
