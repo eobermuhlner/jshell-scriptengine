@@ -158,38 +158,42 @@ public class JShellCompiledScript extends CompiledScript {
         List<SnippetEvent> events = jshell.eval(snippetScript);
 
         for (SnippetEvent event : events) {
-            if (event.exception() != null) {
-                JShellException exception = event.exception();
-                String message = exception.getMessage() == null ? "" : ": " + exception.getMessage();
-                if (exception instanceof EvalException) {
-                    EvalException evalException = (EvalException) exception;
-                    throw new ScriptException(evalException.getExceptionClassName() + message + "\n" + event.snippet().source());
-                }
-                throw new ScriptException(message + "\n" + event.snippet().source());
-            }
-
-            if (event.status() == Snippet.Status.VALID) {
+            if (event.status() == Snippet.Status.VALID && event.exception() == null) {
                 result = accessDirectExecutionControl.getLastValue();
             } else {
-                Snippet snippet = event.snippet();
-                Optional<Diag> optionalDiag = jshell.diagnostics(snippet).findAny();
-                if (optionalDiag.isPresent()) {
-                    Diag diag = optionalDiag.get();
-                    throw new ScriptException(diag.getMessage(null) + "\n" + snippet);
-                }
-
-                if (snippet instanceof DeclarationSnippet) {
-                    DeclarationSnippet declarationSnippet = (DeclarationSnippet) snippet;
-                    List<String> unresolvedDependencies = jshell.unresolvedDependencies(declarationSnippet).collect(Collectors.toList());
-                    if (!unresolvedDependencies.isEmpty()) {
-                        throw new ScriptException("Unresolved dependencies: " + unresolvedDependencies + "\n" + snippet);
-                    }
-                }
-
-                throw new ScriptException("Unknown error\n" + snippet);
+                throwAsScriptException(jshell, event);
             }
         }
         return result;
+    }
+
+    private void throwAsScriptException(JShell jshell, SnippetEvent event) throws ScriptException {
+        if (event.exception() != null) {
+            JShellException exception = event.exception();
+            String message = exception.getMessage() == null ? "" : ": " + exception.getMessage();
+            if (exception instanceof EvalException) {
+                EvalException evalException = (EvalException) exception;
+                throw new ScriptException(evalException.getExceptionClassName() + message + "\n" + event.snippet().source());
+            }
+            throw new ScriptException(message + "\n" + event.snippet().source());
+        }
+
+        Snippet snippet = event.snippet();
+        Optional<Diag> optionalDiag = jshell.diagnostics(snippet).findAny();
+        if (optionalDiag.isPresent()) {
+            Diag diag = optionalDiag.get();
+            throw new ScriptException(diag.getMessage(null) + "\n" + snippet);
+        }
+
+        if (snippet instanceof DeclarationSnippet) {
+            DeclarationSnippet declarationSnippet = (DeclarationSnippet) snippet;
+            List<String> unresolvedDependencies = jshell.unresolvedDependencies(declarationSnippet).collect(Collectors.toList());
+            if (!unresolvedDependencies.isEmpty()) {
+                throw new ScriptException("Unresolved dependencies: " + unresolvedDependencies + "\n" + snippet);
+            }
+        }
+
+        throw new ScriptException("Unknown error\n" + snippet);
     }
 
     @Override
@@ -197,7 +201,7 @@ public class JShellCompiledScript extends CompiledScript {
         return engine;
     }
 
-    private List<String> compileScript(JShell jshell, String script) throws ScriptException {
+    private static List<String> compileScript(JShell jshell, String script) throws ScriptException {
         List<String> snippets = new ArrayList<>();
 
         while (!script.isEmpty()) {
@@ -225,7 +229,7 @@ public class JShellCompiledScript extends CompiledScript {
 
         @Override
         protected String invoke(Method doitMethod) throws Exception {
-            lastValue = doitMethod.invoke(null, new Object[0]);
+            lastValue = doitMethod.invoke(null);
             return valueString(lastValue);
         }
 

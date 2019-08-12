@@ -1,19 +1,10 @@
 package ch.obermuhlner.scriptengine.jshell;
 
-import jdk.jshell.*;
-import jdk.jshell.execution.DirectExecutionControl;
-import jdk.jshell.spi.ExecutionControl;
-import jdk.jshell.spi.ExecutionControlProvider;
-import jdk.jshell.spi.ExecutionEnv;
-
 import javax.script.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class JShellScriptEngine implements ScriptEngine, Compilable {
 

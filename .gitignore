@@ -17,3 +17,6 @@ out
 *.iml
 .idea
 
+# other stuff
+
+trigger_*.sh
