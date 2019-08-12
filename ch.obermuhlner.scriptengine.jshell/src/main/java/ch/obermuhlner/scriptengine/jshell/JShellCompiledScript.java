@@ -47,16 +47,14 @@ public class JShellCompiledScript extends CompiledScript {
         }
     }
 
-    private static Map<String, Object> staticVariables;
     private void pushVariables(JShell jshell, AccessDirectExecutionControl accessDirectExecutionControl, Bindings globalBindings, Bindings engineBindings) throws ScriptException {
-        staticVariables = mergeBindings(globalBindings, engineBindings);
+        Map<String, Object> variables = mergeBindings(globalBindings, engineBindings);
+        VariablesTransfer.setVariables(variables);
 
-        Set<String> remainingKeys = new HashSet<>(staticVariables.keySet());
-
-        for (String name : remainingKeys) {
-            Object value = getVariableValue(name);
+        for (String name : variables.keySet()) {
+            Object value = variables.get(name);
             String type = determineType(value);
-            String script = type + " " + name + " = (" + type + ") " + getClass().getName() + ".getVariableValue(\"" + name + "\");";
+            String script = type + " " + name + " = (" + type + ") " + VariablesTransfer.class.getName() + ".getVariableValue(\"" + name + "\");";
             evaluateSnippet(jshell, accessDirectExecutionControl, script);
         }
     }
@@ -65,10 +63,10 @@ public class JShellCompiledScript extends CompiledScript {
         try {
             jshell.variables().forEach(varSnippet -> {
                 String name = varSnippet.name();
-                String script = getClass().getName() + ".setVariableValue(\"" + name + "\", " + name + ");";
+                String script = VariablesTransfer.class.getName() + ".setVariableValue(\"" + name + "\", " + name + ");";
                 try {
                     evaluateSnippet(jshell, accessDirectExecutionControl, script);
-                    Object value = getVariableValue(name);
+                    Object value = VariablesTransfer.getVariableValue(name);
                     setBindingsValue(globalBindings, engineBindings, name, value);
                 } catch (ScriptException e) {
                     throw new ScriptRuntimeException(e);
@@ -78,7 +76,7 @@ public class JShellCompiledScript extends CompiledScript {
             throw (ScriptException) e.getCause();
         }
 
-        staticVariables = null;
+        VariablesTransfer.clear();
     }
 
     private void setBindingsValue(Bindings globalBindings, Bindings engineBindings, String name, Object value) {
@@ -120,14 +118,6 @@ public class JShellCompiledScript extends CompiledScript {
         }
 
         return true;
-    }
-
-    public static Object getVariableValue(String name) {
-        return staticVariables.get(name);
-    }
-
-    public static void setVariableValue(String name, Object value) {
-        staticVariables.put(name, value);
     }
 
     private Map<String, Object> mergeBindings(Bindings... bindingsToMerge) {

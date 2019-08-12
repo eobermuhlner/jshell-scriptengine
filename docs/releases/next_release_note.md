@@ -15,13 +15,6 @@ and evaluate the compiled script multiple times.
 In order to free resources the JShell instance is now closed after
 evaluation.
 
-# Enhancements
-
-## Added `Example.method(y)`
-
-Added `Example.method(y)` 
-
-
 # Examples
 
 Note: The example code is available on github, but not part of the
