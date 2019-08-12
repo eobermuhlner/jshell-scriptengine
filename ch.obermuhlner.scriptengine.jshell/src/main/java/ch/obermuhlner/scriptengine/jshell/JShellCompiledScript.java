@@ -53,25 +53,6 @@ public class JShellCompiledScript extends CompiledScript {
 
         Set<String> remainingKeys = new HashSet<>(staticVariables.keySet());
 
-        /*
-        try {
-            jshell.variables().forEach(varSnippet -> {
-                String name = varSnippet.name();
-                remainingKeys.remove(name);
-                try {
-                    Object value = getVariableValue(name);
-                    String type = determineType(value);
-                    String script = name + " = (" + type + ") " + getClass().getName() + ".getVariableValue(\"" + name + "\");";
-                    evaluateSnippet(jshell, script);
-                } catch (ScriptException e) {
-                    throw new ScriptRuntimeException(e);
-                }
-            });
-        } catch (ScriptRuntimeException e) {
-            throw (ScriptException) e.getCause();
-        }
-        */
-
         for (String name : remainingKeys) {
             Object value = getVariableValue(name);
             String type = determineType(value);
