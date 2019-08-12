@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
+/**
+ * Script engine for JShell.
+ */
 public class JShellScriptEngine implements ScriptEngine, Compilable {
 
     private ScriptContext context = new SimpleScriptContext();

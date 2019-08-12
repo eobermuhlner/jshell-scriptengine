@@ -5,6 +5,9 @@ import javax.script.ScriptEngineFactory;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Factory for {@link JShellScriptEngine}.
+ */
 public class JShellScriptEngineFactory implements ScriptEngineFactory {
     @Override
     public String getEngineName() {

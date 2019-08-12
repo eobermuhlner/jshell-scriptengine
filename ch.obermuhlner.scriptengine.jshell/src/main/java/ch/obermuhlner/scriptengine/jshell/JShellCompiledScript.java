@@ -13,19 +13,21 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Compiled script of a {@link JShellScriptEngine}.
+ */
 public class JShellCompiledScript extends CompiledScript {
     private final JShellScriptEngine engine;
     private final List<String> snippets;
 
-
     JShellCompiledScript(JShellScriptEngine engine, String script) throws ScriptException {
         this.engine = engine;
 
-        JShell jshell = JShell.builder()
+        try (JShell jshell = JShell.builder()
                 .executionEngine(new LocalExecutionControlProvider(), null)
-                .build();
-        this.snippets = compileScript(jshell, script);
-        jshell.close();
+                .build()) {
+            this.snippets = compileScript(jshell, script);
+        }
     }
 
     @Override
