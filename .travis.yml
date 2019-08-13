@@ -2,6 +2,14 @@ language: java
 jdk:
   - oraclejdk11
 
+addons:
+  sonarcloud:
+    organization: "eobermuhlner"
+    token:
+      secure: c8k+p+eHVaenUd2w2IrpTnYdIwENiFOrrgSjgAiDj6gbSpB5WSuliXJ7ntKTF5lRMfj7CWFc41cFWznkURI4g7j9Pt8tNl6VJssrjTKIz8KEUqwqNxh58W07+pijzYjJtMvvxMPq8yXr71iA3y5SrBrE9VQWJcxOEx9ILDWy2IKIHghqh7gy+AGp335LVIFOzCnutFWSFb4axJrtGlzr4ZSAFQ6wZz9x7c8WQij5hu5aPPg8UU/tZuv7o+0KLy/bPNvmAX1lBiwVOBl5tj0AwqYAiHKxqLpuaog3ZxAU6rhByYXAXTEHjuAMBeJtcOu8czQ35ou80T9bt6AApiPMxgyhV4wWD9L5V1jIzYV25NpZJR09ly43MDEJ+fWBiUgJVJ+G64RZxMT0KKwskXSZooaEzU0MS3kio3mC8nSFVb51aUcIVA3UbE2drMQ8MFQf2kLCJSlbPe1aj4VwWdt0T3jX+i3iFkQ2Z3/LE+rryQrldKQrKoz79GXVuXiR5EdhoNO46l7My8veiKcBs+C/qgCw/5fuBw5p9cKJVZ3x1/FOFhiqsuho8SFj+Em6Flp8qb5kCvHcqgwexkiNOKPWYWsBqpYs9DdgXRJ5yiD0WFRJxE2nP6aVdwuWfTp8+hziynjwq2a8VxMBLNvF5Zpo6ym52U+CwFh3hXwqBpyIXKY=
+script:
+  - sonar-scanner
+
 before_install:
   - chmod +x gradlew
 
