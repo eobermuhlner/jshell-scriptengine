@@ -2,7 +2,6 @@
 [![Code Coverage](https://badgen.net/codecov/c/github/eobermuhlner/jshell-scriptengine)](https://codecov.io/gh/eobermuhlner/jshell-scriptengine)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eobermuhlner_jshell-scriptengine&metric=alert_status)](https://sonarcloud.io/dashboard?id=eobermuhlner_jshell-scriptengine)
 [![Open Issues](https://badgen.net/github/open-issues/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/issues)
-[![Commits](https://badgen.net/github/commits/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
 [![Last Commits](https://badgen.net/github/last-commit/eobermuhlner/jshell-scriptengine)](https://github.com/eobermuhlner/jshell-scriptengine/graphs/commit-activity)
 [![Maven Central - jshell-scriptengine](https://img.shields.io/maven-central/v/ch.obermuhlner/jshell-scriptengine.svg)](https://search.maven.org/artifact/ch.obermuhlner/jshell-scriptengine)
 
