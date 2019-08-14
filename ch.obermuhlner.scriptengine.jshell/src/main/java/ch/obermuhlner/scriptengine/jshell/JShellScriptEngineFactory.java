@@ -16,7 +16,7 @@ public class JShellScriptEngineFactory implements ScriptEngineFactory {
 
     @Override
     public String getEngineVersion() {
-        return "1.0.0";
+        return "1.1.0";
     }
 
     @Override

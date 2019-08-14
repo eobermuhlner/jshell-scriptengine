@@ -1,19 +1,19 @@
 # API changes
 
-## Support for `Compilable`
+No API changes.
 
-The `jshell-scriptengine` supports now the `Compilable` interface.
-
-If the same script needs to be evaluated multiple times with different
-variable bindings then it is much faster to compile the script only once
-and evaluate the compiled script multiple times.
 
 # Bugfixes
 
-## Close `JShell` instance after evaluation
+No Bugfix changes.
 
-In order to free resources the JShell instance is now closed after
-evaluation.
+
+# Enhancements
+
+## Added `Example.method(y)`
+
+Added `Example.method(y)` 
+
 
 # Examples
 

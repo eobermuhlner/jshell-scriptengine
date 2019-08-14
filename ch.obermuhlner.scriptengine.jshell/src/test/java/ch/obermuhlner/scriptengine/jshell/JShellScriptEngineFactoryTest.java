@@ -18,7 +18,7 @@ public class JShellScriptEngineFactoryTest {
     @Test
     public void testGetEngineVersion() {
         JShellScriptEngineFactory factory = new JShellScriptEngineFactory();
-        assertThat(factory.getEngineVersion()).isEqualTo("1.0.0");
+        assertThat(factory.getEngineVersion()).isEqualTo("1.1.0");
     }
 
     @Test
