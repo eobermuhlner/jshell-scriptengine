@@ -35,7 +35,7 @@ test {
 
 sonarqube {
     properties {
-        property "sonar.projectKey" jshell-scriptengine
+        property "sonar.projectKey", "jshell-scriptengine"
     }
 }
 
