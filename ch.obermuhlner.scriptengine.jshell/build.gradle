@@ -33,6 +33,12 @@ test {
     }
 }
 
+sonarqube {
+    properties {
+        property "sonar.projectKey" jshell-scriptengine
+    }
+}
+
 jacocoTestReport {
     reports {
         xml.enabled = true
