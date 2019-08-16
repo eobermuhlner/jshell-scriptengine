@@ -7,7 +7,8 @@
 
 # JShell scripting engine
 
-The JShell was introduced with Java 9 and was designed to be used
+The [JShell](https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm)
+was introduced with Java 9 and was designed to be used
 for interactive execution of code snippets in Java.
 
 The `jshell-scriptengine` library is a Java 11 wrapper around the JShell
@@ -100,7 +101,7 @@ Output Variable: 5
 
 ## Access to classes
 
-The JShell script is executed in the same process 
+The JShell script is executed in the same Thread as the caller 
 and has therefore access to the same classes.
 
 Assume your project has the following class:
@@ -196,9 +197,9 @@ try {
 
     {
         Bindings bindings = engine.createBindings();
-
         bindings.put("alpha", 2);
         bindings.put("beta", 3);
+
         Object result = compiledScript.eval(bindings);
         Integer output = (Integer) bindings.get("output");
         System.out.println("Result (Integer): " + result);
@@ -207,9 +208,9 @@ try {
 
     {
         Bindings bindings = engine.createBindings();
-
         bindings.put("alpha", "aaa");
         bindings.put("beta", "bbb");
+
         Object result = compiledScript.eval(bindings);
         String output = (String) bindings.get("output");
         System.out.println("Result (String): " + result);
@@ -233,9 +234,12 @@ Output (String): aaabbb
 Separating the compilation from the evaluation is more efficient if you
 need to evaluate the same script multiple times.
 
-Here the execution times in milliseconds for
-calling `JShellScriptEngine.eval(String)` many times compared
-with a single `JShellScriptEngine.compile(String)`
-and many `JShellCompiledScript.eval(Bindings)`:
+Here the execution times in milliseconds for:
+* Multi Eval
+  * many calls to `JShellScriptEngine.eval(String)`
+    (essentially compile and evaluate every time)
+* Compile + Multi Eval
+  * single call to `JShellScriptEngine.compile(String)`
+  * many calls to `JShellCompiledScript.eval(Bindings)`
 
 ![Performance: Compile Multiple Evaluations](docs/performance/Compile_Multiple_Evaluations.svg)
