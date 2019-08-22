@@ -487,6 +487,5 @@ public class JShellScriptEngineTest {
         public void close() throws IOException {
             throw new IOException("FailReader: always fails in close()");
         }
-
     }
 }
